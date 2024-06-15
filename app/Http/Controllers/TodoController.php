@@ -41,10 +41,15 @@ class TodoController extends Controller
         return response()->json($todo);
     }
 
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        $todo->delete();
+        $todo = Todo::destroy($id);
 
-        return response()->json(['message' => 'Todo deleted successfully']);
+        if($todo){
+            return response()->json(['message' => 'Todo deleted successfully']);
+        }else{
+            return response()->json(['message' => 'Error Deleting the Record']);
+        }
+
     }
 }
